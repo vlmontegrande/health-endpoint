@@ -7,7 +7,6 @@ get_memory_usage() {
 }
 
 get_disk_usage() {
-  #df -m --total | awk 'END{print "Used: "$3", Free: "$4", Usage: "$5"\n"}'
   df -m --total | awk 'END{printf "%s/%s", $3,$2}'
 }
 
@@ -29,8 +28,7 @@ uptime=$(get_uptime)
 
 users=$(get_users)
 
-echo '
-{
+echo '{
   "cpu": "'$cpu'",
   "memory": "'$memory'",
   "disk": "'$disk'",
