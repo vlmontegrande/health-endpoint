@@ -12,3 +12,6 @@ services:
         limits:
           cpus: "0.25"
           memory: 256M
+    volumes:
+      - /:/rootfs:ro
+      - /run/utmp:/run/utmp:ro
