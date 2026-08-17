@@ -1,3 +1,5 @@
+#!/bin/sh
+
 get_cpu_usage() {
   top -bn1 | head -n 5 | awk '/%Cpu/ {print 100 - $8"%"}'
 }
