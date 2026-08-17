@@ -1,16 +1,20 @@
 #!/bin/sh
 
 get_cpu_usage() {
-  top -bn1 | head -n 5 | awk '/%Cpu/ {print 100 - $8"%"}'
+  read -r _ u1 n1 s1 i1 _ < /proc/stat
+  sleep 1
+  read -r _ u2 n2 s2 i2 _ < /proc/stat
+  total=$(( (u2+n2+s2+i2) - (u1+n1+s1+i1) ))
+  idle=$(( i2 - i1 ))
+  awk -v t="$total" -v i="$idle" 'BEGIN{printf "%.1f%%", 100*(t-i)/t}'
 }
 
 get_memory_usage() {
-  memory= free -m | awk 'NR==2{printf "%s/%s", $3,$2}'
+  free -m | awk 'NR==2{printf "%s/%s", $3,$2}'
 }
 
 get_disk_usage() {
-  #df -m --total | awk 'END{print "Used: "$3", Free: "$4", Usage: "$5"\n"}'
-  df -m --total | awk 'END{printf "%s/%s", $3,$2}'
+  df -m /rootfs | awk 'END{printf "%s/%s", $3,$2}'
 }
 
 get_uptime() {
@@ -18,7 +22,7 @@ get_uptime() {
 }
 
 get_users() {
-  who | awk '{print $1}'
+  who /rootfs/run/utmp | awk '{print $1}'
 }
 
 cpu=$(get_cpu_usage)
