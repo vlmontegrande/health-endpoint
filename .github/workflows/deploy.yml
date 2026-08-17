@@ -54,6 +54,7 @@ jobs:
 
       - name: Pull and restart
         run: |
+          scp ./docker-compose.yml ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}/home/vlmontegrande/health-endpoint/docker-compose.yml
           ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "\
             docker compose -f /home/vlmontegrande/health-endpoint/docker-compose.yml pull && \
             docker compose -f /home/vlmontegrande/health-endpoint/docker-compose.yml up -d"
