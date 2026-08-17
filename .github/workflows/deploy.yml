@@ -52,9 +52,6 @@ jobs:
             StrictHostKeyChecking no
           EOF
 
-      - name: Checkout code for compose file
-        uses: actions/checkout@v4
-
       - name: Pull and restart
         run: |
           ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "\
