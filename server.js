@@ -21,7 +21,7 @@ app.get('/', async function(req, res) {
 
   const [code] = await once(script, 'close');
 
-  console.log(`server health script exited with code ${code}`);
+  console.log(`health script exited with code ${code}`);
 });
 
 app.listen(port, () => console.log(`Running on port ${port}!`));
