@@ -55,12 +55,6 @@ jobs:
       - name: Checkout code for compose file
         uses: actions/checkout@v4
 
-      - name: Check token
-        run: |
-          curl -s -o /dev/null -w "%{http_code}\n" https://${{ secrets.SSH_HOST }} \
-            -H "CF-Access-Client-Id: ${{ secrets.CF_ACCESS_CLIENT_ID }}" \
-            -H "CF-Access-Client-Secret: ${{ secrets.CF_ACCESS_CLIENT_SECRET }}"
-
       - name: Pull and restart
         run: |
           scp ./docker-compose.yml ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/vlmontegrande/health-endpoint/docker-compose.yml
