@@ -33,5 +33,5 @@ echo '{
   "cpu": "'$cpu'",
   "memory": "'$memory'",
   "disk": "'$disk'",
-  "uptime": "'$uptime'",
+  "uptime": "'$uptime'"
 }'
