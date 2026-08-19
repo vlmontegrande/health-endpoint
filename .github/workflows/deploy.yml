@@ -46,9 +46,7 @@ jobs:
         run: |
           cat <<EOF >> ~/.ssh/config
           Host ${{ secrets.SSH_HOST }}
-            ProxyCommand cloudflared access ssh --hostname %h \
-              --service-token-id ${{ secrets.CF_ACCESS_CLIENT_ID }} \
-              --service-token-secret ${{ secrets.CF_ACCESS_CLIENT_SECRET }}
+            ProxyCommand TUNNEL_SERVICE_TOKEN_ID=${{ secrets.CF_ACCESS_CLIENT_ID }} TUNNEL_SERVICE_TOKEN_SECRET=${{ secrets.CF_ACCESS_CLIENT_SECRET }} cloudflared access ssh --hostname %h
             StrictHostKeyChecking no
           EOF
 
