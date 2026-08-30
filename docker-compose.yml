@@ -14,4 +14,3 @@ services:
           memory: 256M
     volumes:
       - /:/rootfs:ro
-      - /run/utmp:/run/utmp:ro
